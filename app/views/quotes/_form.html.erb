@@ -1,30 +1,113 @@
 <%= form_for @quote do |f| %>
 
-   <div class='form-group'>
-      <%= f.label :customer_name %>
-      <%= f.text_field :customer_name, class: 'form-control' %>
-   </div>
+   <% if @quote.errors.any? %>
+      <div class="alert alert-danger" role="alert"><strong>There were some errors:</strong>
+      <ul>
+         <% @quote.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+         <% end %>
+      </ul></div>
+   <% end %>
 
-   <div class='form-group'>
-      <%= f.label :street %>
-      <%= f.text_field :street, class: 'form-control' %>
-   </div>
+   <div class="row">
+      <div class="col-sm-6"> <!-- Job information -->
+         <h2>Job Information</h2> 
 
-   <div class='form-group'>
-      <%= f.label :city %>
-      <%= f.text_field :city, class: 'form-control' %>
-   </div>
+         <%= f.fields_for :applications do |a| %>
 
-   <div class='form-group'>
-      <%= f.label :zip_code %>
-      <%= f.text_field :zip_code, class: 'form-control' %>
-   </div>
+            <div class='form-group'>
+               <%= a.label :application_type %>
+               <%= a.text_field :application_type, class: 'form-control' %>
+            </div>
 
-   <div class='form-group'>
-      <%= f.label :state %>
-      <%= f.text_field :state, class: 'form-control' %>
-   </div>
+            <div class='form-group'>
+               <%= a.label :description %>
+               <%= a.text_field :description, class: 'form-control' %>
+            </div>
 
+            <div class="row">
+
+               <div class="col-sm-6">
+                  <div class='form-group'>
+                     <%= a.label :oc %>
+                     <%= a.text_field :oc, class: 'form-control' %>
+                  </div>
+
+                  <div class='form-group'>
+                     <%= a.label :framing %>
+                     <%= a.text_field :framing, class: 'form-control' %>
+                  </div>
+
+                  <div class='form-group'>
+                     <%= a.label :r_value %>
+                     <%= a.text_field :r_value, class: 'form-control' %>
+                  </div>
+                  
+                  <div class='form-group'>
+                     <%= a.label :depth %>
+                     <%= a.text_field :depth, class: 'form-control' %>
+                  </div>
+               </div>
+               
+               <div class="col-sm-6">
+                  <div class='form-group'>
+                     <%= a.label :length %>
+                     <%= a.text_field :length, class: 'form-control' %>
+                  </div>
+
+                  <div class='form-group'>
+                     <%= a.label :width %>
+                     <%= a.text_field :width, class: 'form-control' %>
+                  </div>
+                  
+                  <div class='form-group'>
+                     <%= a.label :height %>
+                     <%= a.text_field :height, class: 'form-control' %>
+                  </div>
+
+                  <div class='form-group'>
+                     <%= a.label :vapor_barrier %>
+                     <%= a.text_field :vapor_barrier, class: 'form-control' %>
+                  </div>
+               </div>
+
+            <% end %>
+         </div> <!-- Job information end -->         
+      </div>
+
+   
+
+      <div class="col-sm-6"> <!-- Customer information -->
+         <h2>Customer Information</h2>
+
+         <div class='form-group'>
+            <%= f.label :customer_name %>
+            <%= f.text_field :customer_name, class: 'form-control' %>
+         </div>
+
+         <div class='form-group'>
+            <%= f.label :street %>
+            <%= f.text_field :street, class: 'form-control' %>
+         </div>
+
+         <div class='form-group'>
+            <%= f.label :city %>
+            <%= f.text_field :city, class: 'form-control' %>
+         </div>
+
+         <div class='form-group'>
+            <%= f.label :zip_code %>
+            <%= f.text_field :zip_code, class: 'form-control' %>
+         </div>
+
+         <div class='form-group'>
+            <%= f.label :state %>
+            <%= f.text_field :state, class: 'form-control' %>
+         </div>
+
+
+      </div> <!-- Customer information -->
+   </div>
    <%= f.submit class: 'btn btn-primary' %>
-
+   
 <% end %>

@@ -3,6 +3,7 @@ class QuotesController < ApplicationController
 
    def new
       @quote = Quote.new
+      @quote.applications.build
    end
 
    def create
@@ -42,7 +43,19 @@ class QuotesController < ApplicationController
          :street,
          :city,
          :zip_code,
-         :state
+         :state,
+         applications_attributes: [
+            :application_type,
+            :description,
+            :oc,
+            :framing,
+            :r_value,
+            :depth,
+            :length,
+            :width,
+            :height,
+            :vapor_barrier
+         ]
       )
    end
 
