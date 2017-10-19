@@ -1,4 +1,5 @@
 class QuotesController < ApplicationController
+   before_action :find_quote, only: [:show, :edit, :destroy, :update]
 
    def new
       @quote = Quote.new
@@ -14,11 +15,23 @@ class QuotesController < ApplicationController
    end
 
    def show
-      @quote = Quote.find(params[:id])
    end
 
    def index
       @quotes = Quote.all      
+   end
+
+   def edit
+   end
+
+   def destroy
+      @quote.destroy
+      redirect_to quotes_path
+   end
+
+   def update
+      @quote.update(quote_params)
+      redirect_to quote_path(@quote)
    end
 
    private
@@ -31,6 +44,10 @@ class QuotesController < ApplicationController
          :zip_code,
          :state
       )
+   end
+
+   def find_quote
+      @quote = Quote.find(params[:id])
    end
 
 end

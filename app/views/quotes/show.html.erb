@@ -18,3 +18,7 @@
       <p><%= @quote.city %>, <%= @quote.state %> <%= @quote.zip_code %></p>
    </div>
 </div>
+
+<div class="btn-group" role="group">      
+   <%= render partial: 'quotes/button_group', locals: {quote: @quote} %>
+</div>
