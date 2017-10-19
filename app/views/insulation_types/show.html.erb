@@ -1,0 +1,77 @@
+<h1>Insulation Type</h1>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Name</h3>
+   </div>
+   <div class="panel-body">
+      <%= @insulationtype.name %>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">OC</h3>
+   </div>
+   <div class="panel-body">
+      <%= @insulationtype.oc %>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Framing</h3>
+   </div>
+   <div class="panel-body">
+      <%= @insulationtype.framing %>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">R-Value</h3>
+   </div>
+   <div class="panel-body">
+      <%= @insulationtype.r_value %>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Thickness</h3>
+   </div>
+   <div class="panel-body">
+      <%= @insulationtype.thickness %>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Width</h3>
+   </div>
+   <div class="panel-body">
+      <%= @insulationtype.width %>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Pacing</h3>
+   </div>
+   <div class="panel-body">
+      <%= @insulationtype.facing %>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Price</h3>
+   </div>
+   <div class="panel-body">
+      $<%= @insulationtype.price %> per quare foot
+   </div>
+</div>
+
+<div class="btn-group" role="group">      
+   <%= render partial: 'insulation_types/button_group', locals: {type: @insulationtype} %>
+</div>
