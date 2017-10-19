@@ -17,6 +17,10 @@ class QuotesController < ApplicationController
       @quote = Quote.find(params[:id])
    end
 
+   def index
+      @quotes = Quote.all      
+   end
+
    private
 
    def quote_params

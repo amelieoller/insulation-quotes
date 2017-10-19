@@ -1,0 +1,10 @@
+<h1>All Quotes</h1>
+
+<ul class="list-group">
+   <% @quotes.each do |quote| %>
+      <li class="list-group-item">
+         <strong>Customer Name:</strong> <%= quote.customer_name %> |
+         <strong>Address:</strong> <%= quote.city %>, <%= quote.state %> <%= quote.zip_code %>
+      </li>
+   <% end %>
+</ul>
