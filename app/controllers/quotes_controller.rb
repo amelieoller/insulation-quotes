@@ -9,7 +9,7 @@ class QuotesController < ApplicationController
    def create
       @quote = current_user.quotes.build(quote_params)
       if @quote.save
-         redirect_to quote_path(@quote)
+         redirect_to quote_path(@quote), alert: 'Your quote was successfully created'
       else
          render :new
       end
