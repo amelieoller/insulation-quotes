@@ -1,0 +1,2 @@
+class InsulationTypesController < ApplicationController
+end

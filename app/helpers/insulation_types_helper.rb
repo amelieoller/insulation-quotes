@@ -1,0 +1,2 @@
+module InsulationTypesHelper
+end

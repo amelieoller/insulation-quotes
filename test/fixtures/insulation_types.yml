@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  application: 
+  name: MyString
+  oc: 1
+  framing: MyString
+  r_value: MyString
+  thickness: 1
+  width: 1
+  facing: MyString
+  price: 1
+
+two:
+  application: 
+  name: MyString
+  oc: 1
+  framing: MyString
+  r_value: MyString
+  thickness: 1
+  width: 1
+  facing: MyString
+  price: 1
