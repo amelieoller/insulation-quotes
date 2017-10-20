@@ -1,29 +1,11 @@
-<h1>Insulation Type</h1>
+<h1><%= @insulationtype.name %></h1>
 
 <div class="panel panel-default">
    <div class="panel-heading">
-      <h3 class="panel-title">Name</h3>
+      <h3 class="panel-title">Coverage</h3>
    </div>
    <div class="panel-body">
-      <%= @insulationtype.name %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">OC</h3>
-   </div>
-   <div class="panel-body">
-      <%= @insulationtype.oc %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Framing</h3>
-   </div>
-   <div class="panel-body">
-      <%= @insulationtype.framing %>
+      <%= @insulationtype.coverage %>
    </div>
 </div>
 
@@ -56,7 +38,7 @@
 
 <div class="panel panel-default">
    <div class="panel-heading">
-      <h3 class="panel-title">Pacing</h3>
+      <h3 class="panel-title">Facing</h3>
    </div>
    <div class="panel-body">
       <%= @insulationtype.facing %>
@@ -68,7 +50,7 @@
       <h3 class="panel-title">Price</h3>
    </div>
    <div class="panel-body">
-      $<%= @insulationtype.price %> per quare foot
+      $<%= @insulationtype.price %> per square foot
    </div>
 </div>
 
