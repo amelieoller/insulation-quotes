@@ -14,6 +14,7 @@ ActiveRecord::Schema.define(version: 20171019175539) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "quote_id"
+    t.integer "insulation_type_id"
     t.string "application_type"
     t.string "description"
     t.integer "oc"
@@ -24,24 +25,24 @@ ActiveRecord::Schema.define(version: 20171019175539) do
     t.integer "width"
     t.integer "height"
     t.string "vapor_barrier"
+    t.integer "bags_needed"
+    t.integer "square_foot_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["insulation_type_id"], name: "index_applications_on_insulation_type_id"
     t.index ["quote_id"], name: "index_applications_on_quote_id"
   end
 
   create_table "insulation_types", force: :cascade do |t|
-    t.integer "application_id"
     t.string "name"
-    t.integer "oc"
-    t.string "framing"
-    t.string "r_value"
+    t.integer "coverage"
+    t.integer "r_value"
     t.integer "thickness"
     t.integer "width"
     t.string "facing"
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["application_id"], name: "index_insulation_types_on_application_id"
   end
 
   create_table "quotes", force: :cascade do |t|
