@@ -1,113 +1,122 @@
 <%= form_for @quote do |f| %>
 
-   <% if @quote.errors.any? %>
-      <div class="alert alert-danger" role="alert"><strong>There were some errors:</strong>
-      <ul>
-         <% @quote.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-         <% end %>
-      </ul></div>
-   <% end %>
+<% if @quote.errors.any? %>
+<div class="alert alert-danger" role="alert"><strong>There were some errors:</strong>
+	<ul>
+		<% @quote.errors.full_messages.each do |message| %>
+		<li><%= message %></li>
+		<% end %>
+	</ul></div>
+	<% end %>
+	
+	<div class="row">
+		<div class="col-sm-6"> <!-- Customer information -->
+			<h2>Customer Information</h2>
+			
+			<div class='form-group'>
+				<%= f.label :customer_name %>
+				<%= f.text_field :customer_name, class: 'form-control' %>
+			</div>
+			
+			<div class='form-group'>
+				<%= f.label :street %>
+				<%= f.text_field :street, class: 'form-control' %>
+			</div>
+			
+			<div class='form-group'>
+				<%= f.label :city %>
+				<%= f.text_field :city, class: 'form-control' %>
+			</div>
+			
+			<div class='form-group'>
+				<%= f.label :zip_code %>
+				<%= f.text_field :zip_code, class: 'form-control' %>
+			</div>
+			
+			<div class='form-group'>
+				<%= f.label :state %>
+				<%= f.text_field :state, class: 'form-control' %>
+			</div>
+			
+			
+		</div> <!-- Customer information -->
+		<div class="col-sm-6"> <!-- Job information -->
+			<h2>Job Information</h2> 
+			
+			<%= f.fields_for :applications do |a| %>
+			
+			<div class='form-group'>
+				<%= a.label :application_type %>
+				<%= a.select :application_type, [['Wall'], ['Ceiling'], ['Floor']], {:include_blank => true}, {class: 'form-control'} %>
+				
+			</div>
+			
+			<div class='form-group'>
+				<%= a.label :description %>
+				<%= a.text_field :description, class: 'form-control' %>
+			</div>
+			
+			<div class="row">
+				
+				<div class="col-sm-6">
+					<div class='form-group'>
+						<%= a.label :oc %>
+						<!-- <%#= a.text_field :oc, class: 'form-control' %> -->
+						<%= a.collection_select :oc, InsulationType.all.select(:width).distinct, :width, :width, {:include_blank => true}, {class: 'form-control'} %>
+					</div>
+					
+					<div class='form-group'>
+						<%= a.label :framing %>
+						<%= a.select :framing, [['TGI'], ['Metal'], ['Conventional']], {:include_blank => true}, {class: 'form-control'} %>
+					</div>
+					
+					<div class='form-group'>
+						<%= a.label :r_value, 'R-Value (greater than or equal to)' %>
+						<%= a.collection_select :r_value, InsulationType.all.select(:r_value).distinct, :r_value, :r_value, {:include_blank => true}, {class: 'form-control'} %>
+					</div>
+					
+					<div class='form-group'>
+						<%= a.label :depth, 'Depth (in inches)' %>
+						<%= a.text_field :depth, class: 'form-control' %>
+					</div>
 
-   <div class="row">
-      <div class="col-sm-6"> <!-- Job information -->
-         <h2>Job Information</h2> 
-
-         <%= f.fields_for :applications do |a| %>
-
-            <div class='form-group'>
-               <%= a.label :application_type %>
-               <%= a.text_field :application_type, class: 'form-control' %>
-            </div>
-
-            <div class='form-group'>
-               <%= a.label :description %>
-               <%= a.text_field :description, class: 'form-control' %>
-            </div>
-
-            <div class="row">
-
-               <div class="col-sm-6">
-                  <div class='form-group'>
-                     <%= a.label :oc %>
-                     <%= a.text_field :oc, class: 'form-control' %>
-                  </div>
-
-                  <div class='form-group'>
-                     <%= a.label :framing %>
-                     <%= a.text_field :framing, class: 'form-control' %>
-                  </div>
-
-                  <div class='form-group'>
-                     <%= a.label :r_value %>
-                     <%= a.text_field :r_value, class: 'form-control' %>
-                  </div>
-                  
-                  <div class='form-group'>
-                     <%= a.label :depth %>
-                     <%= a.text_field :depth, class: 'form-control' %>
-                  </div>
-               </div>
-               
-               <div class="col-sm-6">
-                  <div class='form-group'>
-                     <%= a.label :length %>
-                     <%= a.text_field :length, class: 'form-control' %>
-                  </div>
-
-                  <div class='form-group'>
-                     <%= a.label :width %>
-                     <%= a.text_field :width, class: 'form-control' %>
-                  </div>
-                  
-                  <div class='form-group'>
-                     <%= a.label :height %>
-                     <%= a.text_field :height, class: 'form-control' %>
-                  </div>
-
-                  <div class='form-group'>
-                     <%= a.label :vapor_barrier %>
-                     <%= a.text_field :vapor_barrier, class: 'form-control' %>
-                  </div>
-               </div>
-
-            <% end %>
-         </div> <!-- Job information end -->         
-      </div>
-
-   
-
-      <div class="col-sm-6"> <!-- Customer information -->
-         <h2>Customer Information</h2>
-
-         <div class='form-group'>
-            <%= f.label :customer_name %>
-            <%= f.text_field :customer_name, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :street %>
-            <%= f.text_field :street, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :city %>
-            <%= f.text_field :city, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :zip_code %>
-            <%= f.text_field :zip_code, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :state %>
-            <%= f.text_field :state, class: 'form-control' %>
-         </div>
-
-
-      </div> <!-- Customer information -->
-   </div>
-   <%= f.submit class: 'btn btn-primary' %>
-   
-<% end %>
+					<div class='form-group'>
+						<%= a.label :square_foot_price, 'Price (per square foot)' %>
+						<%= a.text_field :square_foot_price, class: 'form-control' %>
+					</div>
+				</div>
+				
+				<div class="col-sm-6">
+					<div class='form-group'>
+						<%= a.label :length, 'Length (in feet)' %>
+						<%= a.text_field :length, class: 'form-control' %>
+					</div>
+					
+					<div class='form-group'>
+						<%= a.label :width, 'Width (in feet)' %>
+						<%= a.text_field :width, class: 'form-control' %>
+					</div>
+					
+					<div class='form-group'>
+						<%= a.label :height, 'Height (in feet)' %>
+						<%= a.text_field :height, class: 'form-control' %>
+					</div>
+					
+					<div class='form-group'>
+						<%= a.label :vapor_barrier %>
+						<%= a.collection_select :vapor_barrier, InsulationType.all.select(:facing).distinct, :facing, :facing, {:include_blank => true}, {class: 'form-control'} %>
+					</div>
+				</div>
+				
+				<% end %>
+			</div> <!-- Job information end -->         
+		</div>
+		
+		
+		
+		
+	</div>
+	<%= f.submit class: 'btn btn-primary' %>
+	
+	<% end %>
+	
