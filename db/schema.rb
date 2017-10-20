@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20171019175539) do
     t.integer "height"
     t.string "vapor_barrier"
     t.integer "bags_needed"
-    t.integer "square_foot_price"
+    t.decimal "square_foot_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["insulation_type_id"], name: "index_applications_on_insulation_type_id"

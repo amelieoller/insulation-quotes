@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
     @width = application[:width].to_i 
     @height = application[:height].to_i 
     @vapor_barrier = application[:vapor_barrier]
+    @square_foot_price = application[:square_foot_price]
 
     def material_width
       if @framing == "conventional" # Conventioal framing
@@ -33,7 +34,7 @@ class ApplicationController < ActionController::Base
     end
 
     def chosen_insulation
-      InsulationType.where("thickness <= ? AND r_value >= ?", @depth, @r_value).where("width = ?", material_width).where("facing like ?", facing_type).order(price: :asc).first   
+      InsulationType.where("thickness <= ? AND r_value >= ?", @depth, @r_value).where("width = ?", material_width).where("facing like ?", facing_type).order(price: :asc).first
     end
 
     def bags_needed
@@ -42,7 +43,7 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    {chosen_insulation: chosen_insulation, bags_needed: bags_needed, facing_type: facing_type}
+    {chosen_insulation: chosen_insulation, bags_needed: bags_needed, facing_type: facing_type, facing_type: facing_type}
 
   end
  
