@@ -19,6 +19,27 @@
    </div>
 </div>
 
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Quote Results</h3>
+   </div>
+   <div class="panel-body">
+      <p>Chosen Insulation: <%= link_to @quote.applications.first.insulation_type.name, insulation_type_path(@quote.applications.first.insulation_type) %></p> 
+      <p>Bags Needed:<%= @quote.applications.first.bags_needed %></p>
+   </div>
+</div>
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+      <h3 class="panel-title">Specs</h3>
+   </div>
+   <div class="panel-body">
+      <p>Created on: <%= @quote.applications.first.insulation_type.created_at.strftime("%a, %e %b %Y") %></p> 
+      <p>Updated on: <%= @quote.applications.first.insulation_type.updated_at.strftime("%a, %e %b %Y") %></p>
+   </div>
+</div>
+
 <div class="btn-group" role="group">      
    <%= render partial: 'quotes/button_group', locals: {quote: @quote} %>
 </div>
+
