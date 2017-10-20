@@ -1,19 +1,12 @@
 <h1>Your Quote</h1>
+<% @first_app = @quote.applications.first %>
 
 <div class="panel panel-default">
    <div class="panel-heading">
-      <h3 class="panel-title">Customer Name</h3>
+      <h3 class="panel-title">Customer</h3>
    </div>
    <div class="panel-body">
-      <%= @quote.customer_name %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Address</h3>
-   </div>
-   <div class="panel-body">
+      <p><%= @quote.customer_name %></p>    
       <p><%= @quote.street %></p>
       <p><%= @quote.city %>, <%= @quote.state %> <%= @quote.zip_code %></p>
    </div>
@@ -21,21 +14,32 @@
 
 <div class="panel panel-default">
    <div class="panel-heading">
-      <h3 class="panel-title">Quote Results</h3>
+      <h3 class="panel-title">Results</h3>
    </div>
    <div class="panel-body">
-      <p>Chosen Insulation: <%= link_to @quote.applications.first.insulation_type.name, insulation_type_path(@quote.applications.first.insulation_type) %></p> 
-      <p>Bags Needed:<%= @quote.applications.first.bags_needed %></p>
+      <p>Chosen Insulation: <%= link_to @first_app.insulation_type.name, insulation_type_path(@first_app.insulation_type) %></p> 
+      <p>Bags Needed: <%= @first_app.bags_needed %></p>
+      <p>Total (based on price per square foot): $<%= @first_app.length * @first_app.height * @first_app.square_foot_price %></p>
    </div>
 </div>
 
 <div class="panel panel-default">
    <div class="panel-heading">
-      <h3 class="panel-title">Specs</h3>
+      <h3 class="panel-title">Details</h3>
    </div>
    <div class="panel-body">
-      <p>Created on: <%= @quote.applications.first.insulation_type.created_at.strftime("%a, %e %b %Y") %></p> 
-      <p>Updated on: <%= @quote.applications.first.insulation_type.updated_at.strftime("%a, %e %b %Y") %></p>
+      <p>Application Type: <%= @first_app.application_type %> |
+      Description: <%= @first_app.description %> |
+      OC: <%= @first_app.oc %> |
+      Framing: <%= @first_app.framing %> |
+      R-Value: <%= @first_app.r_value %> |
+      Depth: <%= @first_app.depth %> |
+      Length: <%= @first_app.length %> |
+      Width: <%= @first_app.width %> |
+      Height: <%= @first_app.height %> |
+      Vapor Barrier: <%= @first_app.vapor_barrier %>
+      <p>Created on: <%= @first_app.insulation_type.created_at.strftime("%a, %e %b %Y") %></p> 
+      <p>Updated on: <%= @first_app.insulation_type.updated_at.strftime("%a, %e %b %Y") %></p>
    </div>
 </div>
 
