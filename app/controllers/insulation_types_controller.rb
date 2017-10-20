@@ -40,8 +40,7 @@ class InsulationTypesController < ApplicationController
    def insulationtype_params
       params.require(:insulation_type).permit(
          :name,
-         :oc,
-         :framing,
+         :coverage,
          :r_value,
          :thickness,
          :width,
