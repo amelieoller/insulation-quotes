@@ -1,17 +1,25 @@
 class QuotesController < ApplicationController
+   helper QuotesHelper
    before_action :find_quote, only: [:show, :edit, :destroy, :update]
 
    def new
       @quote = Quote.new
       @quote.applications.build
+      @insulation_types = InsulationType.all
+      @framing = [{name: "tgi"}, {name: "convent"}]
    end
 
    def create
       @quote = current_user.quotes.build(quote_params)
-      if @quote.save
-         redirect_to quote_path(@quote), alert: 'Your quote was successfully created'
+      @application = @quote.applications.first
+      @application.insulation_type = calculate_quote(params)[:chosen_insulation]
+      if !@application.insulation_type.nil?
+         @application.bags_needed = calculate_quote(params)[:bags_needed]         
+         if @quote.save
+            redirect_to quote_path(@quote)
+         end
       else
-         render :new
+         render :new                     
       end
    end
 
@@ -54,7 +62,8 @@ class QuotesController < ApplicationController
             :length,
             :width,
             :height,
-            :vapor_barrier
+            :vapor_barrier,
+            :square_foot_price
          ]
       )
    end
