@@ -10,7 +10,7 @@
 	<% end %>
 	
 	<div class="row">
-		<div class="col-sm-6"> <!-- Customer information -->
+		<div class="col-sm-5"> <!-- Customer information -->
 			<h2>Customer Information</h2>
 			
 			<div class='form-group'>
@@ -40,7 +40,7 @@
 			
 			
 		</div> <!-- Customer information -->
-		<div class="col-sm-6"> <!-- Job information -->
+		<div class="col-sm-7"> <!-- Job information -->
 			<h2>Job Information</h2> 
 			
 			<%= f.fields_for :applications do |a| %>
@@ -71,35 +71,44 @@
 					</div>
 					
 					<div class='form-group'>
-						<%= a.label :r_value, 'R-Value (greater than or equal to)' %>
+						<%= a.label :r_value, 'R-Value' %>
 						<%= a.collection_select :r_value, InsulationType.all.select(:r_value).distinct, :r_value, :r_value, {:include_blank => true}, {class: 'form-control'} %>
+						<span id="helpBlock" class="help-block">greater than or equal</span>
 					</div>
 					
 					<div class='form-group'>
-						<%= a.label :depth, 'Depth (in inches)' %>
+						<%= a.label :depth, 'Depth' %>
 						<%= a.text_field :depth, class: 'form-control' %>
+						<span id="helpBlock" class="help-block">in inches</span>	
 					</div>
 
 					<div class='form-group'>
-						<%= a.label :square_foot_price, 'Price (per square foot)' %>
-						<%= a.text_field :square_foot_price, class: 'form-control' %>
+						<%= a.label :square_foot_price, 'Price' %>					
+						<div class="input-group">
+							<div class="input-group-addon">$</div>
+							<%= a.text_field :square_foot_price, class: 'form-control' %>
+						</div>
+						<span id="helpBlock" class="help-block">per square foot</span>						
 					</div>
 				</div>
 				
 				<div class="col-sm-6">
 					<div class='form-group'>
-						<%= a.label :length, 'Length (in feet)' %>
+						<%= a.label :length, 'Length' %>
 						<%= a.text_field :length, class: 'form-control' %>
+						<span id="helpBlock" class="help-block">in feet</span>		
 					</div>
 					
 					<div class='form-group'>
-						<%= a.label :width, 'Width (in feet)' %>
+						<%= a.label :width, 'Width' %>
 						<%= a.text_field :width, class: 'form-control' %>
+						<span id="helpBlock" class="help-block">in feet</span>								
 					</div>
 					
 					<div class='form-group'>
-						<%= a.label :height, 'Height (in feet)' %>
+						<%= a.label :height, 'Height' + ' in feet' %>
 						<%= a.text_field :height, class: 'form-control' %>
+						<span id="helpBlock" class="help-block">in feet</span>
 					</div>
 					
 					<div class='form-group'>
