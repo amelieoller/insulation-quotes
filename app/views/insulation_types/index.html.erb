@@ -12,7 +12,7 @@
          <strong>Price:</strong> <%= type.price %>
          <div class="btn-group" role="group"> 
             <%= link_to 'View', insulation_type_path(type), method: 'get', class: 'btn btn-primary' %>               
-            <%= render partial: 'insulation_types/button_group', locals: {type: type} %>
+            <%= render partial: 'layouts/button_group', locals: {type: type, model: 'insulation_type'} %>
          </div>
       </li>
    <% end %>

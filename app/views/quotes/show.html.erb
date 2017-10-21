@@ -44,6 +44,7 @@
 </div>
 
 <div class="btn-group" role="group">      
-   <%= render partial: 'quotes/button_group', locals: {quote: @quote} %>
+   <%= render partial: 'layouts/button_group', locals: {type: @quote, model: 'quote'} %>
+   
 </div>
 
