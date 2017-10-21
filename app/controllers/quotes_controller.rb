@@ -1,25 +1,21 @@
 class QuotesController < ApplicationController
-   helper QuotesHelper
    before_action :find_quote, only: [:show, :edit, :destroy, :update]
+   before_action :calculate_quote, only: [:create]
 
    def new
       @quote = Quote.new
-      @quote.applications.build
+      2.times{
+         @quote.applications.build
+      }
       @insulation_types = InsulationType.all
       @framing = [{name: "tgi"}, {name: "convent"}]
    end
 
    def create
-      @quote = current_user.quotes.build(quote_params)
-      @application = @quote.applications.first
-      @application.insulation_type = calculate_quote(params)[:chosen_insulation]
-      if !@application.insulation_type.nil?
-         @application.bags_needed = calculate_quote(params)[:bags_needed]         
-         if @quote.save
-            redirect_to quote_path(@quote)
-         end
+      if @quote.save
+         redirect_to quote_path(@quote)
       else
-         render :new                     
+         render :new
       end
    end
 
@@ -72,4 +68,49 @@ class QuotesController < ApplicationController
       @quote = Quote.find(params[:id])
    end
 
+   def calculate_quote
+      @quote = current_user.quotes.build(quote_params)
+
+      # Set instance variables
+      @quote.applications.first.attributes.each do |key, value|
+         next if key.include?("id")
+         instance_variable_set("@#{key}", value)
+      end
+
+      # Iterate over applications
+      @quote.applications.each do |application|
+
+         def material_width
+            if @framing == "conventional" # Conventioal framing
+               new_width = @oc - 1        
+               material_width = new_width unless !InsulationType.where("width == ?", @new_width).empty?
+            else
+               material_width = @oc
+            end
+            material_width      
+         end
+         
+         def facing_type
+            if @vapor_barrier == "membrain" || @vapor_barrier == "visqueen"
+               insulation_facing_type = "unfaced"
+            else
+               insulation_facing_type = @vapor_barrier
+            end
+            insulation_facing_type
+         end
+
+         def chosen_insulation
+            InsulationType.where("thickness <= ? AND r_value >= ?", @depth, @r_value).where("width = ?", material_width).where("facing like ?", facing_type).order(price: :asc).first
+         end
+
+         def bags_needed
+            if chosen_insulation
+               (@length * @height) / chosen_insulation.coverage.to_i        
+            end
+         end
+
+         application.insulation_type = chosen_insulation
+         application.bags_needed = bags_needed
+      end
+   end
 end
