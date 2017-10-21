@@ -1,58 +1,11 @@
 <h1><%= @insulationtype.name %></h1>
 
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Coverage</h3>
-   </div>
-   <div class="panel-body">
-      <%= @insulationtype.coverage %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">R-Value</h3>
-   </div>
-   <div class="panel-body">
-      <%= @insulationtype.r_value %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Thickness</h3>
-   </div>
-   <div class="panel-body">
-      <%= @insulationtype.thickness %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Width</h3>
-   </div>
-   <div class="panel-body">
-      <%= @insulationtype.width %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Facing</h3>
-   </div>
-   <div class="panel-body">
-      <%= @insulationtype.facing %>
-   </div>
-</div>
-
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Price</h3>
-   </div>
-   <div class="panel-body">
-      $<%= @insulationtype.price %> per square foot
-   </div>
-</div>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.coverage, name: "Coverage"} %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.r_value, name: "R-Value"} %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.thickness, name: "Thickness"} %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.width, name: "Width"} %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.facing, name: "Facing"} %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.price, name: "Price"} %>
 
 <div class="btn-group" role="group">      
    <%= render partial: 'layouts/button_group', locals: {type: @insulationtype, model: 'insulation_type'} %>
