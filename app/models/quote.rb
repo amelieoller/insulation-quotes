@@ -2,7 +2,7 @@ class Quote < ApplicationRecord
   belongs_to :user
   has_many :applications, dependent: :destroy
   has_many :insulation_types, through: :applications
-  accepts_nested_attributes_for :applications
+  # accepts_nested_attributes_for :applications
 
   # validates :customer_name, presence: true
   # validates :street, presence: true
@@ -10,5 +10,10 @@ class Quote < ApplicationRecord
   # validates :zip_code, presence: true
   # validates :state, presence: true
 
+  def applications_attributes=(applications_attributes)
+    applications_attributes.each do |i, application_attributes|
+      self.applications.build(application_attributes)
+    end
+  end
 
 end
