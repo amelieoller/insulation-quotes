@@ -1,5 +1,5 @@
 <h1>Your Quote</h1>
-<% @first_app = @quote.applications.first %>
+<p>Created by: <%= @quote.user.email %></p>
 
 <div class="panel panel-default">
    <div class="panel-heading">
@@ -11,15 +11,16 @@
       <p><%= @quote.city %>, <%= @quote.state %> <%= @quote.zip_code %></p>
    </div>
 </div>
-
+<% @quote.applications.each.with_index(1) do |application, index| %>
+<h2>Application <%= index %></h2>
 <div class="panel panel-default">
    <div class="panel-heading">
       <h3 class="panel-title">Results</h3>
    </div>
    <div class="panel-body">
-      <p>Chosen Insulation: <%= link_to @first_app.insulation_type.name, insulation_type_path(@first_app.insulation_type) %></p> 
-      <p>Bags Needed: <%= @first_app.bags_needed %></p>
-      <p>Total (based on price per square foot): $<%= @first_app.length * @first_app.height * @first_app.square_foot_price %></p>
+      <p>Chosen Insulation: <%= link_to application.insulation_type.name, insulation_type_path(application.insulation_type) %></p> 
+      <p>Bags Needed: <%= application.bags_needed %></p>
+      <p>Total (based on price per square foot): $<%= application.length * application.height * application.square_foot_price %></p>
    </div>
 </div>
 
@@ -28,20 +29,22 @@
       <h3 class="panel-title">Details</h3>
    </div>
    <div class="panel-body">
-      <p>Application Type: <%= @first_app.application_type %> |
-      Description: <%= @first_app.description %> |
-      OC: <%= @first_app.oc %> |
-      Framing: <%= @first_app.framing %> |
-      R-Value: <%= @first_app.r_value %> |
-      Depth: <%= @first_app.depth %> |
-      Length: <%= @first_app.length %> |
-      Width: <%= @first_app.width %> |
-      Height: <%= @first_app.height %> |
-      Vapor Barrier: <%= @first_app.vapor_barrier %>
-      <p>Created on: <%= @first_app.insulation_type.created_at.strftime("%a, %e %b %Y") %></p> 
-      <p>Updated on: <%= @first_app.insulation_type.updated_at.strftime("%a, %e %b %Y") %></p>
+      <p>Application Type: <%= application.application_type %> |
+      Description: <%= application.description %> |
+      OC: <%= application.oc %> |
+      Framing: <%= application.framing %> |
+      R-Value: <%= application.r_value %> |
+      Depth: <%= application.depth %> |
+      Length: <%= application.length %> |
+      Width: <%= application.width %> |
+      Height: <%= application.height %> |
+      Vapor Barrier: <%= application.vapor_barrier %>
+      <p>Created on: <%= application.insulation_type.created_at.strftime("%a, %e %b %Y") %></p> 
+      <p>Updated on: <%= application.insulation_type.updated_at.strftime("%a, %e %b %Y") %></p>
    </div>
 </div>
+
+<% end %>
 
 <div class="btn-group" role="group">      
    <%= render partial: 'layouts/button_group', locals: {type: @quote, model: 'quote'} %>
