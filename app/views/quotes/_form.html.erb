@@ -1,5 +1,5 @@
 <%= form_for @quote do |f| %>
-<%= render partial: 'applications/error_messages', locals: {model: @quote} %>
+<%= render partial: 'layouts/error_messages', locals: {model: @quote} %>
 <div class="row">
 
 	<!-- Customer information -->
@@ -27,7 +27,7 @@
 				<%= form_group_custom_select_div(a, :framing, [['TGI'], ['Metal'], ['Conventional']]) %>
 				<%= form_group_select_div(a, :vapor_barrier, :facing) %>
 				<%= form_group_div(a, :r_value) %>
-				<%= render partial: 'applications/price', locals: {a: a, item: :square_foot_price} %>
+				<%= render partial: 'layouts/price', locals: {a: a, item: :square_foot_price} %>
 			</div>
 			
 			<div class="col-sm-6">

@@ -1,50 +1,19 @@
 <%= form_for @insulationtype do |f| %>
-   <div class="row">
-      <div class="col-sm-6">
-         <div class='form-group'>
-            <%= f.label :name %>
-            <%= f.text_field :name, class: 'form-control' %>
-         </div>
+<div class="row">
 
-         <div class='form-group'>
-            <%= f.label :coverage %>
-            <%= f.text_field :coverage, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :r_value %>
-            <%= f.text_field :r_value, class: 'form-control' %>
-         </div>
-         
-      </div>
-
-      <div class="col-sm-6">
-         <div class='form-group'>
-            <%= f.label :thickness %>
-            <%= f.text_field :thickness, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :width %>
-            <%= f.text_field :width, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :facing %>
-            <%= f.text_field :facing, class: 'form-control' %>
-         </div>
-
-         <div class='form-group'>
-            <%= f.label :price, 'Price' %>					
-            <div class="input-group">
-               <div class="input-group-addon">$</div>
-               <%= f.text_field :price, class: 'form-control' %>
-            </div>
-         </div>
-         
-      </div>
-      
+   <div class="col-sm-6">
+      <%= form_group_div(f, :name) %>         
+      <%= form_group_div(f, :coverage) %>         
+      <%= form_group_div(f, :r_value) %>         
    </div>
-   <%= f.submit class: 'btn btn-primary' %>
+
+   <div class="col-sm-6">
+      <%= form_group_div(f, :thickness) %>         
+      <%= form_group_div(f, :width) %>         
+      <%= form_group_div(f, :facing) %>
+      <%= render partial: 'layouts/price', locals: {a: f, item: :price} %>             
+   </div>
    
+</div>
+<%= f.submit class: 'btn btn-primary' %>
 <% end %>
