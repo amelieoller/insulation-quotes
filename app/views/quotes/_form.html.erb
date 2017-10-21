@@ -1,131 +1,47 @@
 <%= form_for @quote do |f| %>
+<%= render partial: 'applications/error_messages', locals: {model: @quote} %>
+<div class="row">
 
-<% if @quote.errors.any? %>
-<div class="alert alert-danger" role="alert"><strong>There were some errors:</strong>
-	<ul>
-		<% @quote.errors.full_messages.each do |message| %>
-		<li><%= message %></li>
-		<% end %>
-	</ul></div>
-	<% end %>
-	
-	<div class="row">
-		<div class="col-sm-5"> <!-- Customer information -->
-			<h2>Customer Information</h2>
-			
-			<div class='form-group'>
-				<%= f.label :customer_name %>
-				<%= f.text_field :customer_name, class: 'form-control' %>
-			</div>
-			
-			<div class='form-group'>
-				<%= f.label :street %>
-				<%= f.text_field :street, class: 'form-control' %>
-			</div>
-			
-			<div class='form-group'>
-				<%= f.label :city %>
-				<%= f.text_field :city, class: 'form-control' %>
-			</div>
-			
-			<div class='form-group'>
-				<%= f.label :zip_code %>
-				<%= f.text_field :zip_code, class: 'form-control' %>
-			</div>
-			
-			<div class='form-group'>
-				<%= f.label :state %>
-				<%= f.text_field :state, class: 'form-control' %>
-			</div>
-			
-			
-		</div> <!-- Customer information -->
-		<div class="col-sm-7"> <!-- Job information -->
-			<h2>Job Information</h2> 
-			
-			<%= f.fields_for :applications do |a| %>
-			
-			<div class='form-group'>
-				<%= a.label :application_type %>
-				<%= a.select :application_type, [['Wall'], ['Ceiling'], ['Floor']], {:include_blank => true}, {class: 'form-control'} %>
-				
-			</div>
-			
-			<div class='form-group'>
-				<%= a.label :description %>
-				<%= a.text_field :description, class: 'form-control' %>
-			</div>
-			
-			<div class="row">
-				
-				<div class="col-sm-6">
-					<div class='form-group'>
-						<%= a.label :oc %>
-						<!-- <%#= a.text_field :oc, class: 'form-control' %> -->
-						<%= a.collection_select :oc, InsulationType.all.select(:width).distinct, :width, :width, {:include_blank => true}, {class: 'form-control'} %>
-					</div>
-					
-					<div class='form-group'>
-						<%= a.label :framing %>
-						<%= a.select :framing, [['TGI'], ['Metal'], ['Conventional']], {:include_blank => true}, {class: 'form-control'} %>
-					</div>
-					
-					<div class='form-group'>
-						<%= a.label :r_value, 'R-Value' %>
-						<%= a.collection_select :r_value, InsulationType.all.select(:r_value).distinct, :r_value, :r_value, {:include_blank => true}, {class: 'form-control'} %>
-						<span id="helpBlock" class="help-block">greater than or equal</span>
-					</div>
-					
-					<div class='form-group'>
-						<%= a.label :depth, 'Depth' %>
-						<%= a.text_field :depth, class: 'form-control' %>
-						<span id="helpBlock" class="help-block">in inches</span>	
-					</div>
-
-					<div class='form-group'>
-						<%= a.label :square_foot_price, 'Price' %>					
-						<div class="input-group">
-							<div class="input-group-addon">$</div>
-							<%= a.text_field :square_foot_price, class: 'form-control' %>
-						</div>
-						<span id="helpBlock" class="help-block">per square foot</span>						
-					</div>
-				</div>
-				
-				<div class="col-sm-6">
-					<div class='form-group'>
-						<%= a.label :length, 'Length' %>
-						<%= a.text_field :length, class: 'form-control' %>
-						<span id="helpBlock" class="help-block">in feet</span>		
-					</div>
-					
-					<div class='form-group'>
-						<%= a.label :width, 'Width' %>
-						<%= a.text_field :width, class: 'form-control' %>
-						<span id="helpBlock" class="help-block">in feet</span>								
-					</div>
-					
-					<div class='form-group'>
-						<%= a.label :height, 'Height' + ' in feet' %>
-						<%= a.text_field :height, class: 'form-control' %>
-						<span id="helpBlock" class="help-block">in feet</span>
-					</div>
-					
-					<div class='form-group'>
-						<%= a.label :vapor_barrier %>
-						<%= a.collection_select :vapor_barrier, InsulationType.all.select(:facing).distinct, :facing, :facing, {:include_blank => true}, {class: 'form-control'} %>
-					</div>
-				</div>
-				
-				<% end %>
-			</div> <!-- Job information end -->         
-		</div>
-		
-		
-		
-		
+	<!-- Customer information -->
+	<div class="col-sm-5">
+		<h2>Customer Information</h2>
+		<%= form_group_div(f, :customer_name) %>
+		<%= form_group_div(f, :street) %>
+		<%= form_group_div(f, :city) %>
+		<%= form_group_div(f, :zip_code) %>
+		<%= form_group_div(f, :state) %>
 	</div>
-	<%= f.submit class: 'btn btn-primary' %>
+	<!-- End Customer information -->
+
+	<!-- Job information -->
+	<div class="col-sm-7"> 
+		<h2>Job Information</h2> 
+		<%= f.fields_for :applications do |a| %>
+
+		<%= form_group_custom_select_div(a, :application_type, [['Wall'], ['Ceiling'], ['Floor']]) %>
+		<%= form_group_div(a, :description) %>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<%= form_group_select_div(a, :oc, :width) %>
+				<%= form_group_custom_select_div(a, :framing, [['TGI'], ['Metal'], ['Conventional']]) %>
+				<%= form_group_select_div(a, :vapor_barrier, :facing) %>
+				<%= form_group_div(a, :r_value) %>
+				<%= render partial: 'applications/price', locals: {a: a, item: :square_foot_price} %>
+			</div>
+			
+			<div class="col-sm-6">
+				<%= form_group_div(a, :length) %>
+				<%= form_group_div(a, :width) %>
+				<%= form_group_div(a, :height) %>
+				<%= form_group_div(a, :depth) %>
+			</div>
+		</div>
+
+		<% end %>         
+	</div>
+	<!-- End Job information -->
 	
-	<% end %>
-	
+</div>
+<%= f.submit class: 'btn btn-primary' %>
+<% end %>
