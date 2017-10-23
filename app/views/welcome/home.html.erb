@@ -1,4 +1,5 @@
 <h1>Welcome to Insulation Quotes</h1>
+<% if user_signed_in? %>
 <div class="row">
    <h3>What would you like to do?</h3>
    <div class="col-sm-6">
@@ -16,5 +17,10 @@
          <%= link_to 'New Insulation Type', new_insulation_type_path, class: 'btn btn-primary' %>
       </div>
    </div>
-   
+   <% else %>
+   <h3>You are currently not logged in, please 
+      <%= link_to 'Sign Up', new_user_registration_path, class: 'btn btn-primary btn-sm' %> or 
+      <%= link_to 'Login', new_user_session_path, class: 'btn btn-primary btn-sm' %>.
+   </h3>
+   <% end %>
 </div>
