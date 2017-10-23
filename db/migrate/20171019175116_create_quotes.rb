@@ -7,7 +7,6 @@ class CreateQuotes < ActiveRecord::Migration[5.1]
       t.string :city
       t.integer :zip_code
       t.string :state
-      t.integer :amount
 
       t.timestamps
     end
