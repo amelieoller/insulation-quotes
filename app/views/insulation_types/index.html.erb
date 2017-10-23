@@ -5,11 +5,11 @@
       <li class="list-group-item">
          <strong>Name:</strong> <%= type.name %> |
          <strong>Coverage:</strong> <%= type.coverage %> |
-         <strong>R_Value:</strong> <%= type.r_value %> |
+         <strong>R-Value:</strong> <%= type.r_value %> |
          <strong>Thickness:</strong> <%= type.thickness %> |
          <strong>Width:</strong> <%= type.width %> |
          <strong>Facing:</strong> <%= type.facing %> |
-         <strong>Price:</strong> <%= type.price %>
+         <strong>Price (per bag):</strong> $<%= type.price %>
          <div class="btn-group" role="group"> 
             <%= link_to 'View', insulation_type_path(type), method: 'get', class: 'btn btn-primary' %>               
             <%= render partial: 'layouts/button_group', locals: {type: type, model: 'insulation_type'} %>

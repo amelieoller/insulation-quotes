@@ -1,5 +1,6 @@
 <h1><%= @insulationtype.name %></h1>
 
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.description, name: "Description"} %>
 <%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.coverage, name: "Coverage"} %>
 <%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.r_value, name: "R-Value"} %>
 <%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.thickness, name: "Thickness"} %>

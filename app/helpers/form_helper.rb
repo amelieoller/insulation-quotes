@@ -9,7 +9,7 @@ module FormHelper
    def form_group_select_div(a, item, db_column)
       content_tag :div, class: 'form_group' do
          a.label(item) +
-         a.collection_select(item, InsulationType.all.select(db_column).distinct, db_column, db_column, {:include_blank => true}, {class: 'form-control'})
+         a.collection_select(item, InsulationType.all.select(db_column).distinct.order(db_column), db_column, db_column, {:include_blank => true}, {class: 'form-control'})
       end
    end
 
