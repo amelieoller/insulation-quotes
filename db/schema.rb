@@ -10,37 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171019175539) do
+ActiveRecord::Schema.define(version: 20171022025123) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "quote_id"
-    t.integer "insulation_type_id"
     t.string "application_type"
     t.string "description"
     t.integer "oc"
     t.string "framing"
     t.string "r_value"
-    t.integer "depth"
-    t.integer "length"
-    t.integer "width"
-    t.integer "height"
+    t.decimal "depth"
+    t.decimal "length"
+    t.decimal "width"
+    t.decimal "height"
     t.string "vapor_barrier"
     t.integer "bags_needed"
     t.decimal "square_foot_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["insulation_type_id"], name: "index_applications_on_insulation_type_id"
     t.index ["quote_id"], name: "index_applications_on_quote_id"
+  end
+
+  create_table "applications_insulation_types", id: false, force: :cascade do |t|
+    t.integer "application_id", null: false
+    t.integer "insulation_type_id", null: false
   end
 
   create_table "insulation_types", force: :cascade do |t|
     t.string "name"
-    t.integer "coverage"
+    t.string "description"
+    t.decimal "coverage"
     t.integer "r_value"
-    t.integer "thickness"
-    t.integer "width"
+    t.decimal "thickness"
+    t.decimal "width"
     t.string "facing"
-    t.integer "price"
+    t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -52,7 +56,6 @@ ActiveRecord::Schema.define(version: 20171019175539) do
     t.string "city"
     t.integer "zip_code"
     t.string "state"
-    t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_quotes_on_user_id"
