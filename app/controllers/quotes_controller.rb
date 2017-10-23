@@ -1,4 +1,5 @@
 class QuotesController < ApplicationController
+   before_action :authenticate_user!     
    before_action :find_quote, only: [:show, :edit, :destroy, :update]
    before_action :calculate_quote, only: [:create]
 
