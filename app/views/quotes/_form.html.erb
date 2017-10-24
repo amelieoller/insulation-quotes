@@ -16,29 +16,34 @@
 	<!-- Job information -->
 	<div class="col-sm-7"> 
 		<h2>Job Information</h2> 
-		<%= f.fields_for :applications do |a| %>
-
+		<%= f.nested_fields_for :applications do |a| %>
+		<h3>Application <%= a.remove_nested_fields_link 'Remove', class: 'btn btn-danger btn-sm', role: 'button', data: {confirm: 'Are you sure?'} %></h3>
 		<%= form_group_custom_select_div(a, :application_type, [['Wall'], ['Ceiling'], ['Floor']]) %>
-		<%= form_group_div(a, :description) %>
+		<%= form_group_div(a, :description, "describe to the customer and workers the details of the application") %>
 		
 		<div class="row">
 			<div class="col-sm-6">
-				<%= form_group_select_div(a, :oc, :width) %>
+				<%= form_group_custom_select_div(a, :oc, [[16], [19], [24]]) %>
 				<%= form_group_custom_select_div(a, :framing, [['TGI'], ['Metal'], ['Conventional']]) %>
-				<%= form_group_select_div(a, :vapor_barrier, :facing) %>
-				<%= form_group_div(a, :r_value) %>
+				<%= form_group_custom_select_div(a, :vapor_barrier, [['Unfaced'], ['Kraft'], ['FSK'], ['PSK'], ['Visqueen'], ['Membrain']]) %>
+				<%= form_group_select_div(a, :r_value, :r_value) %>
 				<%= render partial: 'layouts/price', locals: {a: a, item: :square_foot_price} %>
 			</div>
 			
 			<div class="col-sm-6">
-				<%= form_group_div(a, :length) %>
-				<%= form_group_div(a, :width) %>
-				<%= form_group_div(a, :height) %>
-				<%= form_group_div(a, :depth) %>
+				<%= form_group_div(a, :length, "in feet") %>
+				<%= form_group_div(a, :width, "in feet") %>
+				<%= form_group_div(a, :height, "in feet") %>
+				<%= form_group_div(a, :depth, "in inches") %>				
 			</div>
+			
 		</div>
-
+		<%= a.check_box :manual_override %> <%= a.label :insulation_type_ids, "Manual Insulation Overrride (make sure you select the checkbox when overriding)" %>
+		<%= a.collection_select(:insulation_type_ids, InsulationType.all, :id, :name, {include_blank: "selecting this will override all other selections for this application"}, {class: 'form-control'}) %><br>
+		
 		<% end %>         
+		<%= f.add_nested_fields_link :applications, 'Add Application', class: 'btn btn-default btn-sm', role: 'button' %>
+		
 	</div>
 	<!-- End Job information -->
 	
