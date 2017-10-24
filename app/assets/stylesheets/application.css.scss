@@ -14,4 +14,13 @@
  *= require_self
  */
 
-@import "bootstrap"
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
+
+ .fixed-col-width {
+   width: 27%
+ }
+
+ .field_with_errors input {
+  background-color: #f3dede;
+ }
