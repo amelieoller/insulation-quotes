@@ -1,15 +1,15 @@
 module FormHelper
    
-   def form_group_div(a, item)
+   def form_group_div(a, item, placeholder=nil)
       content_tag :div, class: 'form_group' do
-         a.label(item) + a.text_field(item, class: 'form-control')
+         a.label(item) + a.text_field(item, class: 'form-control', placeholder: placeholder)
       end
    end
 
-   def form_group_select_div(a, item, db_column)
+   def form_group_select_div(a, item, db_column, name=db_column, placeholder=true)
       content_tag :div, class: 'form_group' do
          a.label(item) +
-         a.collection_select(item, InsulationType.all.select(db_column).distinct.order(db_column), db_column, db_column, {:include_blank => true}, {class: 'form-control'})
+         a.collection_select(item, InsulationType.all.select(name).distinct.order(name), db_column, name, {include_blank: placeholder}, {class: 'form-control'})
       end
    end
 
