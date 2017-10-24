@@ -12,10 +12,11 @@
     <%= render 'layouts/header' %>
     
     <div class="container">
-      <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
+      <%= render 'layouts/flash_messages' %>        
+      <!-- <%# flash.each do |key, value| %>
+        <div class="alert alert-<%#= key %>" role="alert"><%#= value %></div> -->
         <!-- Bootstrap alerts are: success, info, warning, and danger -->
-      <% end %>
+      <!-- <%# end %> -->
       <%= yield %>
     </div>
   </body>

@@ -1,0 +1,10 @@
+<% if model.errors.any? %>
+<div class="alert alert-danger" role="alert"><strong>There were some errors:</strong>
+   <a href="#" data-dismiss="alert" class="close">×</a>
+   <ul>
+      <% model.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+   </ul>
+</div>
+<% end %>
