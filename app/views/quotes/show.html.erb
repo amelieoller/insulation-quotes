@@ -1,53 +1,84 @@
 <h1>Your Quote</h1>
-<p>Created by: <%= @quote.user.email %></p>
 
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Customer</h3>
+<div class="row">
+
+   <div class="col-sm-8">
+      <div class="panel panel-default">
+         <div class="panel-heading">
+            <h3 class="panel-title">Customer Information</h3>
+         </div>
+         <div class="panel-body">
+            <p><%= @quote.customer_name %></p>    
+            <p><%= @quote.street %></p>
+            <p><%= @quote.city %>, <%= @quote.state %> <%= @quote.zip_code %></p>
+         </div>
+      </div>
    </div>
-   <div class="panel-body">
-      <p><%= @quote.customer_name %></p>    
-      <p><%= @quote.street %></p>
-      <p><%= @quote.city %>, <%= @quote.state %> <%= @quote.zip_code %></p>
+
+   <div class="col-sm-4">
+      <p><strong>Created by:</strong> <%= @quote.user.email %> | <strong>Created on:</strong> <%= @quote.created_at.strftime("%a, %e %b %Y") %> | <strong>Updated on:</strong> <%= @quote.updated_at.strftime("%a, %e %b %Y") %></p>
    </div>
-</div>
-<% @quote.applications.each.with_index(1) do |application, index| %>
-<h2>Application <%= index %></h2>
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Results</h3>
-   </div>
-   <div class="panel-body">
-      <p>Chosen Insulation: <%= link_to application.insulation_type.name, insulation_type_path(application.insulation_type) %></p> 
-      <p>Bags Needed: <%= application.bags_needed %></p>
-      <p>Total (based on price per square foot): $<%= application.length * application.height * application.square_foot_price %></p>
-   </div>
+   
 </div>
 
-<div class="panel panel-default">
-   <div class="panel-heading">
-      <h3 class="panel-title">Details</h3>
-   </div>
-   <div class="panel-body">
-      <p>Application Type: <%= application.application_type %> |
-      Description: <%= application.description %> |
-      OC: <%= application.oc %> |
-      Framing: <%= application.framing %> |
-      R-Value: <%= application.r_value %> |
-      Depth: <%= application.depth %> |
-      Length: <%= application.length %> |
-      Width: <%= application.width %> |
-      Height: <%= application.height %> |
-      Vapor Barrier: <%= application.vapor_barrier %>
-      <p>Created on: <%= application.insulation_type.created_at.strftime("%a, %e %b %Y") %></p> 
-      <p>Updated on: <%= application.insulation_type.updated_at.strftime("%a, %e %b %Y") %></p>
-   </div>
-</div>
 
-<% end %>
+<table class="table table-striped">
+   
+   <thead>
+      <tr>
+         <th>Application</th>
+         <th>Application Type</th>
+         <th>Description</th>
+         <th class="fixed-col-width">
+            Chosen Insulation
+            <input onclick="change()" type="button" value="More" id="moreInsulationLink" class="btn btn-primary btn-xs" />
+         </th>
+         <th>Bags Needed</th>
+         <th>Total (based on sq ft price)</th>
+      </tr>
+   </thead>
+   
+   <tbody>
+      <% @quote.applications.each.with_index(1) do |application, index| %>
+      <tr>
+         <td><%= index %></td>
+         <td><%= application.application_type %></td>
+         <td><%= application.description %></td>
+         <% if application.insulation_types.empty? %>         
+            <td>No insulation was found<td><td></td>
+         <% else %>
+ 
+            <td>
+               <strong>
+                  <%= link_to sorted_by_effective_price(application).first.name, sorted_by_effective_price(application).first %>
+               </strong>
+               
+               <span id="moreInsulation">
+                  <% sorted_by_effective_price(application).drop(1).each do |insulation| %>
+                     | <%= link_to insulation.name, insulation_type_path(insulation) %>
+                  <% end %>   
+               </span>​
+               
+            </td>
+            <td>
+               <% sorted_by_effective_price(application).each do |insulation| %>
+                  <%= (application.height * application.length / insulation.coverage).ceil %> |
+               <% end %>
+            </td>
+            <td>
+               $<%= application.length * application.height * application.square_foot_price %>
+            </td>
+            
+         <% end %>            
+      </tr>
+      <% end %>
+   </tbody>
+   
+</table>
+
+<h3>Total: $<%= @quote.applications.inject(0){|sum,application| sum + (application.length.to_f * application.height.to_f * application.square_foot_price.to_f) } %></h3>
 
 <div class="btn-group" role="group">      
    <%= render partial: 'layouts/button_group', locals: {type: @quote, model: 'quote'} %>
-   
 </div>
 
