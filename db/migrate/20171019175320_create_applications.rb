@@ -14,6 +14,7 @@ class CreateApplications < ActiveRecord::Migration[5.1]
       t.string :vapor_barrier
       t.integer :bags_needed
       t.decimal :square_foot_price    
+      t.boolean :manual_override
 
       t.timestamps
     end

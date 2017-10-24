@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20171022025123) do
     t.string "vapor_barrier"
     t.integer "bags_needed"
     t.decimal "square_foot_price"
+    t.boolean "manual_override"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["quote_id"], name: "index_applications_on_quote_id"
