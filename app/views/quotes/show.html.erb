@@ -61,9 +61,8 @@
                
             </td>
             <td>
-               <% sorted_by_effective_price(application).each do |insulation| %>
-                  <%= (application.height * application.length / insulation.coverage).ceil %> |
-               <% end %>
+               <% insulation = sorted_by_effective_price(application).first %>
+               <%= (application.height * application.length / insulation.coverage).ceil %>
             </td>
             <td>
                $<%= application.length * application.height * application.square_foot_price %>
