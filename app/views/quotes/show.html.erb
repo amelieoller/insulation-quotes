@@ -16,7 +16,11 @@
    </div>
 
    <div class="col-sm-4">
-      <p><strong>Created by:</strong> <%= @quote.user.email %> | <strong>Created on:</strong> <%= @quote.created_at.strftime("%a, %e %b %Y") %> | <strong>Updated on:</strong> <%= @quote.updated_at.strftime("%a, %e %b %Y") %></p>
+      <p>
+         <strong>Created by:</strong> <%= @quote.user.email %> | 
+         <strong>Created on:</strong> <%= formatted_date(@quote.created_at) %> | 
+         <strong>Updated on:</strong> <%= formatted_date(@quote.updated_at) %>
+      </p>
    </div>
    
 </div>
