@@ -14,7 +14,11 @@ class AccessoriesController < ApplicationController
    end
 
    def create
-      @accessory = Accessory.find_or_create_by(accessory_params)
+      # Find or create by "case-insensitive"
+      name = accessory_params[:name]
+      @accessory = Accessory.where('lower(name) = ?', name.downcase).first 
+      @accessory ||= Accessory.create(accessory_params)
+
       if @accessory.save
          redirect_to accessory_path(@accessory)
       else

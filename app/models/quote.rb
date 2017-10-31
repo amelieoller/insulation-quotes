@@ -10,14 +10,18 @@ class Quote < ApplicationRecord
   def accessories_attributes=(accessories_hashes)
     accessories_hashes.each do |i, accessory_attributes|
       if accessory_attributes[:name].present?
-        accessory = Accessory.all.find_or_create_by(name: accessory_attributes[:name])
+        # Find or create by "case-insensitive"
+        name = accessory_attributes[:name]
+        accessory = Accessory.where('lower(name) = ?', name.downcase).first 
+        accessory ||= Accessory.create(name: name)
+
         if !self.accessories.include?(accessory)
           self.accessories_quotes.build(accessory: accessory)
         end
       end
     end
   end
-  
+
 
   # def applications_attributes=(applications_attributes)
   #   applications_attributes.each do |i, application_attributes|
