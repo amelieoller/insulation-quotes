@@ -54,6 +54,10 @@ class QuotesController < ApplicationController
          :city,
          :zip_code,
          :state,
+         accessory_ids: [],
+         accessories_attributes: [
+            :name
+         ],
          applications_attributes: [
             :_destroy,
             :id,
