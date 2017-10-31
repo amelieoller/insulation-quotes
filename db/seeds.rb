@@ -7,6 +7,40 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 InsulationType.destroy_all
+Accessory.destroy_all
+
+accessory = [
+   'Knives & Blades',
+   'A11 Staples',
+   'Brooms',
+   'Standard Staple Hammer',
+   'Heavy Staple Hammer',
+   'Strapping',
+   'Pokers',
+   'Foam & Guns',
+   'Long Foam Gun',
+   'Hammer',
+   'Pneumatic Guns & Staples',
+   'Compressor & Hose',
+   'Vacuum Cleaner',
+   'Extractor Cleaner',
+   'Gas Can',
+   "4' Ladder",
+   "6' Ladder",
+   "8' Ladder",
+   'Extension Ladder',
+   'Scaffolding',
+   'Mini Scaffolding',
+   'Lights',
+   'Head Lamps',
+   'Extension Cords',
+   'Subfloor Netting',
+   'Bibs Netting',
+   'Membrain',
+   'Attic Rulers',
+   'Tape',
+   'Atti-Cat Machine'   
+]
 
 insulation = [
    ['IFSK191648K', 106.66, 19, 5.5, 16, 'FSK', 54.94],
@@ -53,6 +87,9 @@ insulation = [
    ['IUHD382348K', 61.33, 38, 10.25, 23, 'Unfaced', 36.908]
 ]
 
+accessory.each do |name|
+   Accessory.create(name: name)
+end
 
 insulation.each do |name, coverage, r_value, thickness, width, facing, price|
    InsulationType.create(
