@@ -1,5 +1,5 @@
 class AccessoriesController < ApplicationController
-
+   before_action :authenticate_user!   
    before_action :find_accessory, only: [:show, :edit, :update, :destroy]
 
    def index
@@ -14,8 +14,12 @@ class AccessoriesController < ApplicationController
    end
 
    def create
-      accessory = Accessory.find_or_create_by(accessory_params)
-      redirect_to accessory_path(accessory)
+      @accessory = Accessory.find_or_create_by(accessory_params)
+      if @accessory.save
+         redirect_to accessory_path(@accessory)
+      else
+         render :new
+      end
    end
 
    def edit
