@@ -14,7 +14,12 @@
 
 		<!-- Accessories -->
 		<h2>Accessories</h2>
-  		<%= f.collection_check_boxes :accessory_ids, Accessory.all, :id, :name %>
+		<%= f.collection_check_boxes :accessory_ids, Accessory.all, :id, :name do |b| %>
+		<%= b.label(class: "check_box") do %>
+				<%= b.check_box(class: "check_box") %>
+				<%= b.object.name %>
+			<% end %>
+		<% end %>
 		<%= f.fields_for :accessories, Accessory.new do |x| %>
 			<%= form_group_div(x, :name, "create a new accessory") %>
   		<% end %>
@@ -56,5 +61,6 @@
 	<!-- End Job information -->
 	
 </div>
+<br>
 <%= f.submit class: 'btn btn-primary' %>
 <% end %>
