@@ -1,8 +1,8 @@
 <h1>Welcome to Insulation Quotes</h1>
 <% if user_signed_in? %>
 <div class="row">
-   <h3>What would you like to do?</h3>
-   <div class="col-sm-6">
+   <h3>What would you like to do?</h3><hr>
+   <div class="col-sm-4">
       <h4>Quotes</h4>
       <div class="btn-group" role="group">  
          <%= link_to 'All Quotes', quotes_path, method: 'get', class: 'btn btn-primary' %>
@@ -10,11 +10,18 @@
       </div>
    </div>
    
-   <div class="col-sm-6">
+   <div class="col-sm-4">
       <h4>Insulation Types</h4>
       <div class="btn-group" role="group">      
          <%= link_to 'All Insulation Types', insulation_types_path, method: 'get', class: 'btn btn-primary' %>
          <%= link_to 'New Insulation Type', new_insulation_type_path, class: 'btn btn-primary' %>
+      </div>
+   </div>
+   <div class="col-sm-4">
+      <h4>Accessories</h4>
+      <div class="btn-group" role="group">      
+         <%= link_to 'All Accessories', accessories_path, method: 'get', class: 'btn btn-primary' %>
+         <%= link_to 'New Insulation Type', new_accessory_path, class: 'btn btn-primary' %>
       </div>
    </div>
    <% else %>

@@ -15,6 +15,10 @@ class AccessoriesController < ApplicationController
 
    def new
       @accessory = Accessory.new
+      if params[:quote_id]
+         @quote = Quote.find(params[:quote_id])         
+         @accessory.accessories_quotes.build(quote: @quote)
+      end
    end
 
    def create
@@ -22,6 +26,11 @@ class AccessoriesController < ApplicationController
       name = accessory_params[:name]
       @accessory = Accessory.where('lower(name) = ?', name.downcase).first 
       @accessory ||= Accessory.create(accessory_params)
+      
+      if params[:quote_id]
+         quote = Quote.find(params[:quote_id])
+         @accessory.accessories_quotes.build(quote: quote)
+      end
 
       if @accessory.save
          redirect_to accessory_path(@accessory)

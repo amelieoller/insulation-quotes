@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :insulation_types
   resources :applications
   resources :quotes do
-    resources :accessories, only: [:index]    
+    resources :accessories, only: [:index, :new]    
   end
   resources :accessories      
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }

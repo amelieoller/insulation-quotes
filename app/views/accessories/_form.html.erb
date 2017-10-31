@@ -1,6 +1,11 @@
 <%= form_for @accessory do |f| %>
-<%= render partial: 'layouts/validation_messages', locals: {model: @accessory} %>      
+<%= render partial: 'layouts/validation_messages', locals: {model: @accessory} %> 
    <%= form_group_div(f, :name) %>
+
+   <% if params[:quote_id] %>
+   <%= hidden_field_tag 'quote_id', @quote.id  %>
+   <% end %>
+   
    <br>
    <%= f.submit class: 'btn btn-primary' %>
 <% end %>
