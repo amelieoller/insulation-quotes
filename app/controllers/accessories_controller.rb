@@ -1,6 +1,6 @@
 class AccessoriesController < ApplicationController
 
-   before_action :find_accessory, only: [:show, :edit, :update]
+   before_action :find_accessory, only: [:show, :edit, :update, :destroy]
 
    def index
       @accessories = Accessory.all
@@ -28,6 +28,11 @@ class AccessoriesController < ApplicationController
       else
          render :edit
       end
+   end
+
+   def destroy
+      @accessory.destroy
+      redirect_to accessories_path
    end
 
    private
