@@ -2,16 +2,24 @@
 <%= render partial: 'layouts/validation_messages', locals: {model: @quote} %>
 <div class="row">
 
-	<!-- Customer information -->
 	<div class="col-sm-5">
+		<!-- Customer information -->
 		<h2>Customer Information</h2>
 		<%= form_group_div(f, :customer_name) %>
 		<%= form_group_div(f, :street) %>
 		<%= form_group_div(f, :city) %>
 		<%= form_group_div(f, :zip_code) %>
-		<%= form_group_div(f, :state) %>
+		<%= form_group_div(f, :state) %>	
+		<!-- End Customer information -->
+
+		<!-- Accessories -->
+		<h2>Accessories</h2>
+  		<%= f.collection_check_boxes :accessory_ids, Accessory.all, :id, :name %>
+		<%= f.fields_for :accessories, Accessory.new do |x| %>
+			<%= form_group_div(x, :name, "create a new accessory") %>
+  		<% end %>
+		<!-- End Accessories -->
 	</div>
-	<!-- End Customer information -->
 
 	<!-- Job information -->
 	<div class="col-sm-7"> 
