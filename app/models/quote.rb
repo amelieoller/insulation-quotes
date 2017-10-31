@@ -2,10 +2,22 @@ class Quote < ApplicationRecord
   belongs_to :user
   has_many :applications, dependent: :destroy
   has_many :insulation_types, through: :applications
-  has_many :quotes_accessories
-  has_many :accessories, through: :quotes_accessories
+  has_many :accessories_quotes
+  has_many :accessories, through: :accessories_quotes
   
   accepts_nested_attributes_for :applications, allow_destroy: true
+
+  def accessories_attributes=(accessories_hashes)
+    accessories_hashes.each do |i, accessory_attributes|
+      if accessory_attributes[:name].present?
+        accessory = Accessory.all.find_or_create_by(name: accessory_attributes[:name])
+        if !self.accessories.include?(accessory)
+          self.accessories_quotes.build(accessory: accessory)
+        end
+      end
+    end
+  end
+  
 
   # def applications_attributes=(applications_attributes)
   #   applications_attributes.each do |i, application_attributes|
