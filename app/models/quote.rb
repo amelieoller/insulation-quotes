@@ -2,6 +2,9 @@ class Quote < ApplicationRecord
   belongs_to :user
   has_many :applications, dependent: :destroy
   has_many :insulation_types, through: :applications
+  has_many :quotes_accessories
+  has_many :accessories, through: :quotes_accessories
+  
   accepts_nested_attributes_for :applications, allow_destroy: true
 
   # def applications_attributes=(applications_attributes)
