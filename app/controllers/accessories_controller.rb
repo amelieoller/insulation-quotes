@@ -3,7 +3,11 @@ class AccessoriesController < ApplicationController
    before_action :find_accessory, only: [:show, :edit, :update, :destroy]
 
    def index
-      @accessories = Accessory.all
+      if params[:quote_id]
+         @accessories = Quote.find(params[:quote_id]).accessories
+      else 
+         @accessories = Accessory.all
+      end
    end
 
    def show
