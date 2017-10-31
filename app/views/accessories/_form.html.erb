@@ -1,10 +1,9 @@
 <div class="row">
    <div class="col-sm-5">
       <%= form_for @accessory do |f| %>
-         <%= f.label :name %>
-         <%= f.text_field :name %>
-
-         <%= f.submit %>
+         <%= form_group_div(f, :name) %>
+         <br>
+         <%= f.submit class: 'btn btn-primary' %>
       <% end %>
    </div>
 </div>
