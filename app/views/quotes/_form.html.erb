@@ -20,9 +20,16 @@
 				<%= b.object.name %>
 			<% end %>
 		<% end %>
-		<%= f.fields_for :accessories, Accessory.new do |x| %>
-			<%= form_group_div(x, :name, "create a new accessory") %>
-  		<% end %>
+
+		<%= f.nested_fields_for :accessories, Accessory.new do |x| %>
+			<div class="input-group">
+				<%= x.text_field :name, class: 'form-control', placeholder: 'create a new accessory' %>
+				<span class="input-group-btn">
+				<button class="btn btn-default" type="button"><%= x.remove_nested_fields_link 'Remove', data: {confirm: 'Are you sure?'} %></button>
+				</span>
+			</div>
+  		<% end %><br>
+		<%= f.add_nested_fields_link :accessories, 'Add Accessory', class: 'btn btn-default btn-sm', role: 'button' %>
 		<!-- End Accessories -->
 	</div>
 

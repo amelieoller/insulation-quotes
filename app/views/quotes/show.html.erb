@@ -21,6 +21,12 @@
          <strong>Created on:</strong> <%= formatted_date(@quote.created_at) %> | 
          <strong>Updated on:</strong> <%= formatted_date(@quote.updated_at) %>
       </p>
+      <p>
+         <strong>Accessories:</strong>
+         <% @quote.accessories.each do |accessory| %>
+            <%= accessory.name %> |
+         <% end %>
+      </p>
    </div>
    
 </div>
@@ -39,7 +45,6 @@
          </th>
          <th>Bags Needed</th>
          <th>Total (based on sq ft price)</th>
-         <th>Accessories</th>
       </tr>
    </thead>
    
@@ -71,11 +76,6 @@
             </td>
             <td>
                $<%= application.length * application.height * application.square_foot_price %>
-            </td>
-            <td>
-               <% @quote.accessories.each do |accessory| %>
-                  <%= accessory.name %> |
-               <% end %>
             </td>
             
          <% end %>            
