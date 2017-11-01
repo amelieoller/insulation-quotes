@@ -1,5 +1,17 @@
 <h1>Insulation Types</h1>
 
+<h3>Filter Insulation Types by Width:</h3>
+<%= form_tag('/insulation_types', method: 'get') do %>
+   <div class="input-group">
+      <%= select_tag 'width', options_from_collection_for_select(InsulationType.all.uniq{ |i| i.width}, 'width', 'width'), include_blank: true, class: 'form-control' %>
+      <span class="input-group-btn">
+         <%= submit_tag 'Filter', class: 'btn btn-default' %>
+      </span>
+   </div>
+<% end %>
+
+<br>
+
 <ul class="list-group">
    <% @insulation_types.each do |type| %>
       <li class="list-group-item">

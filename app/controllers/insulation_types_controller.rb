@@ -19,7 +19,11 @@ class InsulationTypesController < ApplicationController
    end
 
    def index
-      @insulation_types = InsulationType.all      
+      if !params[:width].blank?
+         @insulation_types = InsulationType.select_width(params[:width])
+      else
+         @insulation_types = InsulationType.all
+      end
    end
 
    def edit

@@ -23,7 +23,6 @@ class QuotesController < ApplicationController
    end
 
    def index
-
       if !params[:date].blank?
          if params[:date] == 'Today'
             @quotes = Quote.from_today
