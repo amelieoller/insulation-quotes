@@ -23,7 +23,16 @@ class QuotesController < ApplicationController
    end
 
    def index
-      @quotes = Quote.all      
+
+      if !params[:date].blank?
+         if params[:date] == 'Today'
+            @quotes = Quote.from_today
+         else
+            @quotes = Quote.old
+         end
+      else
+         @quotes = Quote.all
+      end
    end
 
    def edit

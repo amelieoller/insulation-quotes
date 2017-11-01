@@ -1,5 +1,15 @@
 <h1>All Quotes</h1>
 
+<h3>Filter quotes:</h3>
+<%= form_tag('/quotes', method: 'get') do %>
+   <div class="input-group">
+      <%= select_tag 'date', options_for_select(['Today', 'Old']), include_blank: true, class: 'form-control' %>
+      <span class="input-group-btn">
+         <%= submit_tag 'Filter', class: 'btn btn-default' %>
+      </span>
+   </div>
+<% end %>
+<br>
 <ul class="list-group">
    <% @quotes.each do |quote| %>
       <li class="list-group-item">
