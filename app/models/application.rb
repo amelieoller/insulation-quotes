@@ -7,5 +7,4 @@ class Application < ApplicationRecord
   validates :description, presence: true
   validates :length, presence: true
   validates :height, presence: true
-  
 end

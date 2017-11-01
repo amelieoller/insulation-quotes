@@ -1,24 +1,17 @@
-# README
+# Insulation Quotes App
+This Ruby on Rails app lets you create quotes for insulation projects.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
+These instructions will get the projects up and running on your local machine.
 
-Things you may want to cover:
+### Prerequisites
+Make sure your have everything installed to run a Ruby on Rails project on your computer.
 
-* Ruby version
+### Installing
+Clone the project to your computer `git clone https://github.com/amelieoller/insulation-quotes`, open it, run `bundle install` in your terminal, then start a rails server with `rails server`. You will most likely find the app under `http://localhost:3000/` in your browser (read the rails server instructions to find out).
 
-* System dependencies
+## Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/amelieoller/insulation-quotes. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## License
+This app is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
