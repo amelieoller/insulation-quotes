@@ -1,5 +1,6 @@
 class Quote < ApplicationRecord
   belongs_to :user
+  # belongs_to :customer  
   has_many :applications, dependent: :destroy
   has_many :insulation_types, through: :applications
   has_many :accessories_quotes

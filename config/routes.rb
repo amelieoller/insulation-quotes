@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # resources :customers
   root 'welcome#home'
   resources :insulation_types
   resources :applications
