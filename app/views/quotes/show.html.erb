@@ -22,11 +22,17 @@
          <strong>Updated on:</strong> <%= formatted_date(@quote.updated_at) %>
       </p>
       <p>
-         <strong>Accessories:</strong>
-         <% @quote.accessories.each do |accessory| %>
-            <%= accessory.name %> |
-         <% end %>
+         <a id="view-accessories" href="/quotes/<%= @quote.id %>/accessories">View Accessories</a>
+         <div id="accessories">
+            <ul></ul>
+         </div>
+         <!-- <strong>Accessories:</strong> -->
+         <!-- <% @quote.accessories.each do |accessory| %>
+            <%#= accessory.name %> |
+         <% end %> -->
       </p>
+      
+
       <%= link_to 'New Accessory', new_quote_accessory_path(@quote), class: 'btn btn-default btn-xs' %>
    </div>
    
