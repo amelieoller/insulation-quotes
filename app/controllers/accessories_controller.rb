@@ -4,7 +4,7 @@ class AccessoriesController < ApplicationController
 
    def index
       if params[:quote_id]
-         @accessories = Quote.find(params[:quote_id]).accessories
+         @accessories = Quote.find(params[:quote_id]).accessories         
       else 
          @accessories = Accessory.all
       end
@@ -24,16 +24,26 @@ class AccessoriesController < ApplicationController
    def create
       # Find or create by "case-insensitive"
       name = accessory_params[:name]
-      @accessory = Accessory.where('lower(name) = ?', name.downcase).first 
+      @accessory = Accessory.where('lower(name) = ?', name.downcase).first
+      @exists = !!Accessory.where('lower(name) = ?', name.downcase).first 
       @accessory ||= Accessory.create(accessory_params)
-      
+
       if params[:quote_id]
          quote = Quote.find(params[:quote_id])
          @accessory.accessories_quotes.build(quote: quote)
       end
 
       if @accessory.save
-         redirect_to accessory_path(@accessory)
+         respond_to do |format|
+            format.html { redirect_to accessory_path(@accessory) }
+            format.json { 
+               if @exists
+                  render :nothing => true
+               else
+                  render json: @accessory 
+               end
+            }
+         end
       else
          render :new
       end
