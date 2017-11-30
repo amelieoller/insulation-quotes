@@ -10,25 +10,11 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+//= require handlebars
 //= require rails-ujs
-//= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require accessories
 //= require bootstrap
 //= require nested_form_fields
 //= require_tree .
-
-
-$(function() {
-   $("span#moreInsulation").hide();
-   $("input#moreInsulationLink").click(function(event) {
-         event.preventDefault();
-         $("span#moreInsulation").toggle();
-   });
-})
-
-function change() {
-    var elem = document.getElementById("moreInsulationLink");
-    if (elem.value=="More") elem.value = "Less";
-    else elem.value = "More";
-}
