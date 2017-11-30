@@ -4,7 +4,12 @@ class AccessoriesController < ApplicationController
 
    def index
       if params[:quote_id]
-         @accessories = Quote.find(params[:quote_id]).accessories         
+         @quote = Quote.find(params[:quote_id])
+         @accessories = @quote.accessories
+         respond_to do |format|
+            format.html { render :index }
+            format.json { render json: @quote }
+         end
       else 
          @accessories = Accessory.all
       end
