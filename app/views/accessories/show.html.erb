@@ -1,2 +1,4 @@
-<h1><%= @accessory.name %></h1>
+<a href="/accessories/" class="js-next" data-id="<%= @accessory.id %>">Next</a>
+
+<h1 class="select" id="name"><%= @accessory.name %></h1>
 <%= render partial: 'layouts/button_group', locals: {type: @accessory, model: 'accessory'} %>
