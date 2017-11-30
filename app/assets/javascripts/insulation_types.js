@@ -9,7 +9,10 @@ $(function() {
          $('#Thickness').text(data['thickness']);
          $('#Width').text(data['width']);
          $('#Facing').text(data['facing']);
-         $('#Price').text(data['price']);  
+         $('#Price').text(data['price']); 
+         $('a#edit_button').attr('href', `/insulation_types/${nextId}/edit`);
+         $('a#delete_button').attr('href', `/insulation_types/${nextId}`);  
+         
          $('.js-next').attr('data-id', data['id'])       
       })
       e.preventDefault()

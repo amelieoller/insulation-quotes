@@ -10,5 +10,6 @@
 <%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.price, name: "Price"} %>
 
 <div class="btn-group" role="group">      
-   <%= render partial: 'layouts/button_group', locals: {type: @insulationtype, model: 'insulation_type'} %>
+   <%= link_to 'Edit', edit_insulation_type_path(@insulationtype), method: 'get', class: 'btn btn-primary', id: 'edit_button' %>
+   <%= link_to 'Delete', insulation_type_path(@insulationtype), method: 'delete', class: 'btn btn-danger', id: 'delete_button', data: {confirm: 'Are you sure?'} %>
 </div>
