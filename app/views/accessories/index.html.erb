@@ -1,8 +1,31 @@
+<div class="row">
 <h1>Accessories</h1>
-<ul>
+    
+<%= form_for Accessory.new do |f| %>
+<div class="input-group col-md-6">      
+   <%= f.text_field :name, class: 'form-control' %>
+   <span class="input-group-btn">
+      <%= f.submit class: 'btn btn-default' %>
+   </span>
+</div>
+<% end %><br>
+
+<ul id="accessory_list">
 <% @accessories.each do |accessory| %>
-   <li><%= link_to accessory.name, accessory_path(accessory) %></li>
+   <li>
+      <strong><%= link_to accessory.name, accessory_path(accessory) %></strong> | 
+      <%= link_to 'Edit', edit_accessory_path(accessory), method: 'get' %> | 
+      <%= link_to 'Delete', accessory_path(accessory), method: 'delete', data: {confirm: 'Are you sure?'} %>
+   </li>
 <% end %>
 </ul>
 
-<%= link_to 'Create a New Accessory', new_accessory_path, class: 'btn btn-primary' %>
+<div>  
+
+<script id="accessory-template" type="text/x-handlebars-template">
+   <li>
+      <strong><a href="/accessories/{{id}}">{{name}}</a></strong> | 
+      <a href="/accessories/{{id}}/edit">Edit</a> | 
+      <a data-confirm="Are you sure?" rel="nofollow" data-method="delete" href="/accessories/{{id}}">Delete</a>
+   </li>
+</script>
