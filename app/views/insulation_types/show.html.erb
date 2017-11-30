@@ -1,4 +1,5 @@
-<h1><%= @insulationtype.name %></h1>
+<a href="#" class="js-next" data-id="<%= @insulationtype.id %>">Next</a>
+<h1 id="Name"><%= @insulationtype.name %></h1>
 
 <%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.description, name: "Description"} %>
 <%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.coverage, name: "Coverage"} %>
