@@ -1,15 +1,14 @@
-<a href="#" class="js-next" data-id="<%= @insulationtype.id %>">Next</a>
-<h1 id="Name"><%= @insulationtype.name %></h1>
-
-<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.description, name: "Description"} %>
-<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.coverage, name: "Coverage"} %>
-<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.r_value, name: "R-Value"} %>
-<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.thickness, name: "Thickness"} %>
-<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.width, name: "Width"} %>
-<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.facing, name: "Facing"} %>
-<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.price, name: "Price"} %>
+<a href="/insulation_types/" class="js-next" data-id="<%= @insulationtype.id %>">Next</a>
+<h1 class="select" id="name"><%= @insulationtype.name %></h1>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.description, name: "Description", selector: 'description'} %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.coverage, name: "Coverage", selector: 'coverage' } %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.r_value, name: "R-Value", selector: 'r_value' } %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.thickness, name: "Thickness", selector: 'thickness' } %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.width, name: "Width", selector: 'width' } %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.facing, name: "Facing", selector: 'facing' } %>
+<%= render partial: 'insulation_types/display_panel', locals: {body: @insulationtype.price, name: "Price", selector: 'price' } %>
 
 <div class="btn-group" role="group">      
-   <%= link_to 'Edit', edit_insulation_type_path(@insulationtype), method: 'get', class: 'btn btn-primary', id: 'edit_button' %>
-   <%= link_to 'Delete', insulation_type_path(@insulationtype), method: 'delete', class: 'btn btn-danger', id: 'delete_button', data: {confirm: 'Are you sure?'} %>
+   <%= link_to 'Edit', edit_insulation_type_path(@insulationtype), method: 'get', class: 'btn btn-primary select', id: 'edit_button' %>
+   <%= link_to 'Delete', insulation_type_path(@insulationtype), method: 'delete', class: 'btn btn-danger select', id: 'delete_button', data: {confirm: 'Are you sure?'} %>
 </div>
