@@ -1,5 +1,5 @@
-<%= link_to 'Edit', edit_path(type, model), method: 'get', class: 'btn btn-primary' %>
-<%= link_to 'Delete', delete_path(type, model), method: 'delete', class: 'btn btn-danger', data: {confirm: 'Are you sure?'} %>
+<%= link_to 'Edit', edit_path(type, model), method: 'get', class: 'btn btn-primary select', id: 'edit_button' %>
+<%= link_to 'Delete', delete_path(type, model), method: 'delete', class: 'btn btn-danger select', id: 'delete_button', data: {confirm: 'Are you sure?'} %>
 
 
 
