@@ -4,12 +4,14 @@ $(function() {
       url = this.href
       $.getJSON(url + nextId, function(data) {
          
-         idArray = $('.select')
+         idArray = $('.select');
          for (let i = 0; i < idArray.length; i++) {
-            idName = $(idArray[i].id).selector
-            if (!!idArray[i].href) {
-               $('a#edit_button').attr('href', `/insulation_types/${nextId}/edit`);
-               $('a#delete_button').attr('href', `/insulation_types/${nextId}`);
+            idName = $(idArray[i].id).selector;
+            button = $(idArray[i]).attr('href');
+
+            if (button) {
+               var new_button = button.replace(/\d+/g, nextId);            
+               $(idArray[i]).attr('href', new_button);
             } else {
                $(`#${idName}`).text(data[idName]);                  
             }
