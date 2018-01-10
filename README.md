@@ -1,6 +1,9 @@
 # Insulation Quotes App
 This Ruby on Rails app lets you create quotes for insulation projects.
 
+## Short Walkthrough
+![Insulation Quotes Walkthrough](./app/assets/gifs/walkthrough.gif)
+
 ## Getting Started
 These instructions will get the projects up and running on your local machine.
 
