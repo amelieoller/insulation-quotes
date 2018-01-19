@@ -13,7 +13,7 @@ $(function() {
                var new_button = button.replace(/\d+/g, nextId);            
                $(idArray[i]).attr('href', new_button);
             } else {
-               $(`#${idName}`).text(data[idName]);                  
+               $("#" + idName).text(data[idName]);                  
             }
          }
          
@@ -21,7 +21,7 @@ $(function() {
             $('.related_quotes').html('')
             for (var i = 0; i < data.quotes.length; i++) {
                const quote = data.quotes[i];
-               $('.related_quotes').append(`<li>Quote Id: ${quote.id} | Customer Name: ${quote.customer_name}</li>`)
+               $('.related_quotes').append("<li>Quote Id: " + quote.id + " | Customer Name: " + quote.customer_name + "</li>")
             }
          }
          
