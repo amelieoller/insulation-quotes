@@ -5,7 +5,7 @@ $(function() {
       $.getJSON(url + nextId, function(data) {
          
          idArray = $('.select');
-         for (let i = 0; i < idArray.length; i++) {
+         for (var i = 0; i < idArray.length; i++) {
             idName = $(idArray[i].id).selector;
             button = $(idArray[i]).attr('href');
 
@@ -19,7 +19,7 @@ $(function() {
          
          if(data.quotes) {
             $('.related_quotes').html('')
-            for (let i = 0; i < data.quotes.length; i++) {
+            for (var i = 0; i < data.quotes.length; i++) {
                const quote = data.quotes[i];
                $('.related_quotes').append(`<li>Quote Id: ${quote.id} | Customer Name: ${quote.customer_name}</li>`)
             }
