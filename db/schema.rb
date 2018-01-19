@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20171108163344) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "accessories", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -19,14 +22,14 @@ ActiveRecord::Schema.define(version: 20171108163344) do
   end
 
   create_table "accessories_quotes", id: false, force: :cascade do |t|
-    t.integer "quote_id", null: false
-    t.integer "accessory_id", null: false
+    t.bigint "quote_id", null: false
+    t.bigint "accessory_id", null: false
     t.index ["accessory_id", "quote_id"], name: "index_accessories_quotes_on_accessory_id_and_quote_id"
     t.index ["quote_id", "accessory_id"], name: "index_accessories_quotes_on_quote_id_and_accessory_id"
   end
 
   create_table "applications", force: :cascade do |t|
-    t.integer "quote_id"
+    t.bigint "quote_id"
     t.string "application_type"
     t.string "description"
     t.integer "oc"
@@ -46,8 +49,8 @@ ActiveRecord::Schema.define(version: 20171108163344) do
   end
 
   create_table "applications_insulation_types", id: false, force: :cascade do |t|
-    t.integer "application_id", null: false
-    t.integer "insulation_type_id", null: false
+    t.bigint "application_id", null: false
+    t.bigint "insulation_type_id", null: false
   end
 
   create_table "customers", force: :cascade do |t|
@@ -75,7 +78,7 @@ ActiveRecord::Schema.define(version: 20171108163344) do
   end
 
   create_table "quotes", force: :cascade do |t|
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "customer_name"
     t.string "street"
     t.string "city"
@@ -83,7 +86,7 @@ ActiveRecord::Schema.define(version: 20171108163344) do
     t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "customer_id"
+    t.bigint "customer_id"
     t.index ["customer_id"], name: "index_quotes_on_customer_id"
     t.index ["user_id"], name: "index_quotes_on_user_id"
   end
@@ -107,4 +110,6 @@ ActiveRecord::Schema.define(version: 20171108163344) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "applications", "quotes"
+  add_foreign_key "quotes", "users"
 end
