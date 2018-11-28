@@ -40,7 +40,7 @@ gem 'jquery-rails'
 gem 'pry-rails'
 gem 'nested_form_fields'
 gem 'omniauth'
-gem 'omniauth-google-oauth2' 
+gem 'omniauth-google-oauth2'
 gem 'active_model_serializers'
 gem 'handlebars_assets'
 
